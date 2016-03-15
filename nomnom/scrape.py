@@ -20,15 +20,16 @@ def ubereats():
     response = requests.post('https://ubereats-city.appspot.com/_api/menus.get', headers=headers, data=json.dumps(data))
     jsonData = response.json()
 
-    #timestamp = str(date.today() + timedelta(days=2)) + "T00:00:00"
+    # timestamp = str(date.today() + timedelta(days=1)) + "T00:00:00"
     timestamp = str(date.today()) + "T00:00:00"
-
+    # print jsonData
     menus = []
-    for day in jsonData["menu"]:
-        if day["date"] == timestamp:
-            for meal in day["meals"]:
-                m = Menu(meal["restaurant"], meal["description"], meal["dish"], meal["price"])
+    menuData = jsonData.get("menu", {})
+    for day in menuData:
+        if day.get("date") == timestamp:
+            meals = day.get("meals", {})
+            for meal in meals:
+                m = Menu(meal.get("restaurant", ''), meal.get("description", ''), meal.get("dish", ''), meal.get("price", ''))
                 menus.append(m)
             break
-
     return menus

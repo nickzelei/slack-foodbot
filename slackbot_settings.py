@@ -1,4 +1,5 @@
-API_TOKEN = '' #move to env var
+from apikeys import getSlackApiKey
+API_TOKEN = getSlackApiKey()
 default_reply = "Sorry but I didn't understand you"
 
 PLUGINS = [
