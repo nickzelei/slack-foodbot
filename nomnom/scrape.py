@@ -8,6 +8,7 @@ class Menu:
         self.description = des
         self.dish = dish
         self.price = price
+
     def fancyformat(self):
         return self.restaurant + "\n" +\
                self.dish + " - " + self.price + "\n" +\
@@ -22,7 +23,7 @@ def ubereats():
 
     # timestamp = str(date.today() + timedelta(days=1)) + "T00:00:00"
     timestamp = str(date.today()) + "T00:00:00"
-    # print jsonData
+
     menus = []
     menuData = jsonData.get("menu", {})
     for day in menuData:
