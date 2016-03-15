@@ -15,10 +15,13 @@ class Menu:
                self.description +\
                "\n----------\n"
 
+
+headers = {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=UTF-8'}
+url = 'https://ubereats-city.appspot.com/_api/menus.get'
+
 def ubereats():
     data = {'city': 'CHI'}
-    headers = {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=UTF-8'}
-    response = requests.post('https://ubereats-city.appspot.com/_api/menus.get', headers=headers, data=json.dumps(data))
+    response = requests.post(url, headers=headers, data=json.dumps(data))
     jsonData = response.json()
 
     # timestamp = str(date.today() + timedelta(days=1)) + "T00:00:00"
