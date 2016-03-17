@@ -15,17 +15,25 @@ class Menu:
                self.description +\
                "\n----------\n"
 
+class Cities:
+    LOOP = "CHI"
+    NORTHWEST = "CHI_NORTHWEST"
 
 headers = {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=UTF-8'}
 url = 'https://ubereats-city.appspot.com/_api/menus.get'
 
-def ubereats():
-    data = {'city': 'CHI'}
+def ubereats(city, dayOffset = 0):
+    try:
+        if dayOffset < 0:
+            dayOffset = 0
+    except TypeError:
+        dayOffset = 0
+
+    data = {'city': city}
     response = requests.post(url, headers=headers, data=json.dumps(data))
     jsonData = response.json()
 
-    # timestamp = str(date.today() + timedelta(days=1)) + "T00:00:00"
-    timestamp = str(date.today()) + "T00:00:00"
+    timestamp = str(date.today() + timedelta(days=dayOffset)) + "T00:00:00"
 
     menus = []
     menuData = jsonData.get("menu", {})
